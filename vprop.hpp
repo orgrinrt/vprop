@@ -17,7 +17,7 @@ protected:                                                                      
                                                                                                    \
 public:                                                                                            \
     __declspec(property(get = get_##p_prop_name, put = set_##p_prop_name)) p_type p_prop_name;
-#elif
+#else
 // TODO: find a way to do this in GCC etc
 #define prop(p_type, p_prop_name, p_getter, p_setter) ...
 #define vprop(p_type, p_prop_name) ...
