@@ -25,10 +25,12 @@ vprop(p_type, p_prop_name)
 ```cpp
 struct IFoo {
     prop(float, bar, m_get_bar, m_set_bar)
+    // then, for example:
 private:
     float m_bar;
     float m_get_bar() const { return m_bar; }
     void m_set_bar(float value) { m_bar = value; }
+    // ...
 };
 
 ```
