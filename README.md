@@ -1,56 +1,27 @@
-# vprop
+# `vprop`
 
-Simple property macros for cpp (clang &amp; msvc)
+> Property macros for C++ on clang and msvc, for declaring virtual properties.
 
-## What and why
-
-Macros that simplify declaring virtual properties, mainly to make declaring interfaces neater:
-
-### Property
-
-````cpp
-prop(p_type, p_prop_name, p_getter, p_setter)
-````
-
-### Pure virtual property
-
-````cpp
-vprop(p_type, p_prop_name)
-````
-
-## Usage
-
-### Property
+A single header, `vprop.hpp`, with two macros that make declaring properties on an interface neater. `prop(type, name, getter, setter)` declares a property that goes through the given getter and setter, and `vprop(type, name)` declares a pure virtual one.
 
 ```cpp
 struct IFoo {
     prop(float, bar, m_get_bar, m_set_bar)
-    // then, for example:
 private:
     float m_bar;
     float m_get_bar() const { return m_bar; }
     void m_set_bar(float value) { m_bar = value; }
-    // ...
 };
 
-```
-
-### Pure virtual property
-
-```cpp
-struct IFoo {
+struct IBaz {
     vprop(float, bar)
     vprop(int, baz)
     vprop(bool, bat)
-    // ...
 };
 ```
 
-## Note
+They are built on `__declspec(property(get=, put=))`, so they need msvc, or clang with `-fdeclspec` or `-fms-extensions`.
 
-For now, requires either
+## License
 
-* `msvc` or
-* `clang` with either `-fdeclspec` or `-fms-extensions` enabled
-
-due to use of `__declspec(property(get=, put=))`
+The project is licensed under the MIT License, see [LICENSE](LICENSE).
